@@ -8,6 +8,7 @@
 
 use strict;
 use utf8;
+use open IN => ":utf8";
 
 binmode STDIN, ":utf8";
 binmode STDOUT, ":utf8";
@@ -2245,7 +2246,7 @@ my %map = (
 'zwnj' => '‌' # U+0200C
 );
 
-while (<STDIN>) {
+while (<>) {
     my $orig = $_;
     s/_/_lowbar;/g;
     s/&(lowbar|UnderBar|#x0*5F|#0*95);/_lowbar;/g;
