@@ -1,0 +1,76 @@
+#!/usr/bin/perl -n
+
+# usage
+
+# dcr2html < input > output
+# dcr2html input1 input2 .... inputn > output
+
+# converts a file from the TeX DCR character set to HTML entities and 7 bit
+
+s/Ÿ/\&sect;/go;
+s/¸/\&yuml;/go;
+s/½/\&iexcl;/go;
+s/¾/\&iquest;/go;
+s/¿/\&pound;/go;
+s/À/\&Agrave;/go;
+s/Á/\&Aacute;/go;
+s/Â/\&Acirc;/go;
+s/Ã/\&Atilde;/go;
+s/Ä/\&Auml;/go;
+s/Å/\&Aring;/go;
+s/Æ/\&AElig;/go;
+s/Ç/\&Ccedil;/go;
+s/È/\&Egrave;/go;
+s/É/\&Eacute;/go;
+s/Ê/\&Ecirc;/go;
+s/Ë/\&Euml;/go;
+s/Ì/\&Igrave;/go;
+s/Í/\&Iacute;/go;
+s/Î/\&Icirc;/go;
+s/Ï/\&Iuml;/go;
+s/Ð/\&ETH;/go;
+s/Ñ/\&Ntilde;/go;
+s/Ò/\&Ograve;/go;
+s/Ó/\&Oacute;/go;
+s/Ô/\&Ocirc;/go;
+s/Õ/\&Otilde;/go;
+s/Ö/\&Ouml;/go;
+s/Ø/\&Oslash;/go;
+s/Ù/\&Ugrave;/go;
+s/Ú/\&Uacute;/go;
+s/Û/\&Ucirc;/go;
+s/Ü/\&Uuml;/go;
+s/Ý/\&Yacute;/go;
+s/Þ/\&THORN;/go;
+s/à/\&agrave;/go;
+s/á/\&aacute;/go;
+s/â/\&acirc;/go;
+s/ã/\&atilde;/go;
+s/ä/\&auml;/go;
+s/å/\&aring;/go;
+s/æ/\&aelig;/go;
+s/ç/\&ccedil;/go;
+s/è/\&egrave;/go;
+s/é/\&eacute;/go;
+s/ê/\&ecirc;/go;
+s/ë/\&euml;/go;
+s/ì/\&igrave;/go;
+s/í/\&iacute;/go;
+s/î/\&icirc;/go;
+s/ï/\&iuml;/go;
+s/ð/\&eth;/go;
+s/ñ/\&ntilde;/go;
+s/ò/\&ograve;/go;
+s/ó/\&oacute;/go;
+s/ô/\&ocirc;/go;
+s/õ/\&otilde;/go;
+s/ö/\&ouml;/go;
+s/ø/\&oslash;/go;
+s/ù/\&ugrave;/go;
+s/ú/\&uacute;/go;
+s/û/\&ucirc;/go;
+s/ü/\&uuml;/go;
+s/ý/\&yacute;/go;
+s/þ/\&thorn;/go;
+s/ÿ/\&szlig;/go;
+print $_;

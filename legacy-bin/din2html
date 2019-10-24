@@ -1,0 +1,18 @@
+#!/usr/bin/perl -n
+
+# usage
+
+# din2html < input > output
+# din2html input1 input2 .... inputn > output
+
+# converts a file from the German ISO-646-variant to HTML entities and 7 bit
+
+s/@/\&sect;/go;
+s/[/\&Auml;/go;
+s/\/\&Ouml;/go;
+s/]/\&Uuml;/go;
+s/{/\&auml;/go;
+s/|/\&ouml;/go;
+s/}/\&uuml;/go;
+s/~/\&szlig;/go;
+print $_;

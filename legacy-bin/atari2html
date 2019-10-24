@@ -1,0 +1,77 @@
+#!/usr/bin/perl -n
+
+# usage
+
+# atari2html < input > output
+# atari2html input1 input2 .... inputn > output
+
+# converts a file from the Atari ST character set to HTML entities and 7 bit
+
+s/Ä/\&Ccedil;/go;
+s/Å/\&uuml;/go;
+s/Ç/\&eacute;/go;
+s/É/\&acirc;/go;
+s/Ñ/\&auml;/go;
+s/Ö/\&agrave;/go;
+s/Ü/\&aring;/go;
+s/á/\&ccedil;/go;
+s/à/\&ecirc;/go;
+s/â/\&euml;/go;
+s/ä/\&egrave;/go;
+s/ã/\&iuml;/go;
+s/å/\&icirc;/go;
+s/ç/\&igrave;/go;
+s/é/\&Auml;/go;
+s/è/\&Aring;/go;
+s/ê/\&Eacute;/go;
+s/ë/\&aelig;/go;
+s/í/\&AElig;/go;
+s/ì/\&ocirc;/go;
+s/î/\&ouml;/go;
+s/ï/\&ograve;/go;
+s/ñ/\&ucirc;/go;
+s/ó/\&ugrave;/go;
+s/ò/\&yuml;/go;
+s/ô/\&Ouml;/go;
+s/ö/\&Uuml;/go;
+s/õ/\&cent;/go;
+s/ú/\&pound;/go;
+s/ù/\&yen;/go;
+s/û/\&szlig;/go;
+s/†/\&aacute;/go;
+s/°/\&iacute;/go;
+s/¢/\&oacute;/go;
+s/£/\&uacute;/go;
+s/§/\&ntilde;/go;
+s/•/\&Ntilde;/go;
+s/¶/\&ordf;/go;
+s/ß/\&ordm;/go;
+s/®/\&iquest;/go;
+s/™/\&not;/go;
+s/´/\&frac12;/go;
+s/¨/\&frac14;/go;
+s/≠/\&iexcl;/go;
+s/Æ/\&laquo;/go;
+s/Ø/\&raquo;/go;
+s/∞/\&atilde;/go;
+s/±/\&otilde;/go;
+s/≤/\&Oslash;/go;
+s/≥/\&oslash;/go;
+s/∂/\&Agrave;/go;
+s/∑/\&Atilde;/go;
+s/∏/\&Otilde;/go;
+s/π/\&uml;/go;
+s/∫/\&acute;/go;
+s/º/\&para;/go;
+s/Ω/\&copy;/go;
+s/æ/\&reg;/go;
+s/›/\&sect;/go;
+s/Ê/\&micro;/go;
+s/Ò/\&plusmn;/go;
+s/ˆ/\&divide;/go;
+s/¯/\&deg;/go;
+s/˙/\&middot;/go;
+s/˝/\&sup2;/go;
+s/˛/\&sup3;/go;
+s/ˇ/\&hibar;/go;
+print $_;
