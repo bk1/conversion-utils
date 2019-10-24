@@ -2,8 +2,7 @@
 
 # usage
 
-# html2atari < input > output
-# html2atari input1 input2 .... inputn > output
+# html2utf8 < input > output
 
 # converts a file from HTML-entities to UTF-8
 
