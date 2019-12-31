@@ -1,0 +1,69 @@
+#!/usr/bin/perl
+
+# usage
+
+# html2utf8 < input > output
+
+# converts a file from HTML-entities to UTF-8
+
+use strict;
+use utf8;
+use Encode qw(decode encode);
+
+my $inmode  = ":utf8";
+my $dinmode = "UTF-8";
+my $outmode = ":latin1";
+my $doutmode = "ISO-8859-1";
+
+sub usage($) {
+    my $msg = $_[0];
+    if ($msg) {
+        chomp $msg;
+        print $msg, "\n\n";
+    }
+    print <<"EOUSAGE";
+USAGE
+
+$0 < inputfile > outputfile
+
+converts Unicode characters to \u-escapes for Java property files
+EOUSAGE
+    if ($msg) {
+        exit(1);
+    } else {
+        exit(0);
+    }
+}
+
+for my $arg (@ARGV) {
+    if ($arg =~m/--?help|-H|-\?/) {
+        usage(0);
+    }
+}
+
+if ($0 =~ m/utf162utf\d+$/) {
+    $inmode = ':encoding(UTF-16)';
+    $dinmode = 'UTF-16';
+}
+
+print STDERR "Input Encoding: $dinmode; Output Encoding: $doutmode\n";
+# use open IN => $inmode;
+# use encoding $inmode, STDOUT => $outmode;
+
+binmode STDIN,  $inmode;
+binmode STDOUT, $outmode;
+
+while (<>) {
+    while (m/(?<C>[\x{7F}-\x{FFFFFFFF}])/) {
+        my $c = $+{C};
+        my $n = ord($c);
+        my $hex = sprintf("%04x", $n);
+        my $orig = $_;
+        s/$c/\\u$hex/g;
+        my $changed = $_;
+        chomp $orig;
+        chomp $changed;
+        print STDERR "c='$c' n=$n h=$hex orig='$orig' changed='$changed'\n";
+    }
+    print encode($outmode, $_);
+}

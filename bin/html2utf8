@@ -10,9 +10,8 @@ use strict;
 use utf8;
 use Encode qw(decode encode);
 
-my $outmode = "utf8";
-my $inmode  = "utf8";
 my $dinmode = "UTF-8";
+my $outmode = ":utf8";
 my $doutmode = "UTF-8";
 
 sub usage($) {
@@ -59,12 +58,10 @@ if ($0 =~ m/html2utf16$/) {
 }
 
 print STDERR "Input Encoding: $dinmode; Output Encoding: $doutmode\n";
-# use open IN => $inmode;
-# use encoding $inmode, STDOUT => $outmode;
 
 use open IN => ":utf8";
 binmode STDIN, ":utf8";
-binmode STDOUT, ":$outmode";
+binmode STDOUT, $outmode;
 
 my %map = (
     'Aacute' => 'Á', # U+000C1
@@ -2330,5 +2327,5 @@ while (<>) {
     }
     s/_([a-zA-Z0-9#]+);/&$1;/g;
     s/\&lowbar;/_/g;
-    print $_; # 
+    print $_; #
 }

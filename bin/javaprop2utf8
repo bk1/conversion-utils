@@ -1,0 +1,70 @@
+#!/usr/bin/perl
+
+# usage
+
+# javaprop2utf8 < input > output
+
+# converts a file from Java \u-encoded stuff to UTF-8
+
+use strict;
+use utf8;
+use Encode qw(decode encode);
+
+my $inmode  = ":latin1";
+my $dinmode = "ISO-8859-1";
+my $outmode = ":utf8";
+my $doutmode = "UTF-8";
+
+sub usage($) {
+    my $msg = $_[0];
+    if ($msg) {
+        chomp $msg;
+        print $msg, "\n\n";
+    }
+    print <<"EOUSAGE";
+USAGE
+
+$0 < inputfile > outputfile
+
+converts \u-stuff from inputfile into Unicode characters and writes the result into outputfile
+EOUSAGE
+    if ($msg) {
+        exit(1);
+    } else {
+        exit(0);
+    }
+}
+
+for my $arg (@ARGV) {
+    if ($arg =~m/--?help|-H|-\?/) {
+        usage(0);
+    }
+}
+
+if ($0 =~ m/2utf16$/) {
+    $outmode = ':encoding(UTF-16)';
+    $doutmode = 'UTF-16';
+}
+
+if ($0 =~ m/utf82utf\d+$/) {
+    $inmode = ':encoding(UTF-8)';
+    $dinmode = 'UTF-8';
+} elsif ($0 =~ m/utf162utf\d+$/) {
+    $inmode = ':encoding(UTF-16)';
+    $dinmode = 'UTF-16';
+}
+
+print STDERR "Input Encoding: $dinmode; Output Encoding: $doutmode\n";
+
+binmode STDIN, $inmode;
+binmode STDOUT, $outmode;
+
+while (<>) {
+    while (m/\\u(?<HEX>[0-9a-fA-F]{4})/) {
+        my $hex = $+{HEX};
+        my $n = hex($hex);
+        my $c = chr($n);
+        s/\\u$hex/$c/g;
+    }
+    print $_;
+}
