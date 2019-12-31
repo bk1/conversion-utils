@@ -54,7 +54,7 @@ for my $arg (@ARGV) {
 }
 
 if ($0 =~ m/html2utf16$/) {
-    $outmode = 'UTF-16';
+    $outmode = ':encoding(UTF-16)';
     $doutmode = 'UTF-16';
 }
 
@@ -2330,5 +2330,5 @@ while (<>) {
     }
     s/_([a-zA-Z0-9#]+);/&$1;/g;
     s/\&lowbar;/_/g;
-    print encode($outmode, $_);
+    print $_; # 
 }
