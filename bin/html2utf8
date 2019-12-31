@@ -12,6 +12,8 @@ use Encode qw(decode encode);
 
 my $outmode = "utf8";
 my $inmode  = "utf8";
+my $dinmode = "UTF-8";
+my $doutmode = "UTF-8";
 
 sub usage($) {
     my $msg = $_[0];
@@ -24,11 +26,19 @@ USAGE
 
 $0 < inputfile > outputfile
 
-converts HTML-entities from inputfile into UTF8-characters and writes the result into outputfile
+converts HTML-entities from inputfile into Unicode characters and writes the result into outputfile
 
 $0 inputfile1 inputfile2 inputfile3 ... inputfilen > outputfile
 
-converts HTML-entities from concatenated inputfiles into UTF8-characters and writes the result into outputfile
+converts HTML-entities from concatenated inputfiles into Unicode characters and writes the result into outputfile
+
+html2utf8 ... > outputfile
+
+encodes the output in UTF-8
+
+html2utf16 ... > outputfile
+
+encodes the output in UTF-16
 EOUSAGE
     if ($msg) {
         exit(1);
@@ -43,29 +53,12 @@ for my $arg (@ARGV) {
     }
 }
 
-while ($#ARGV >= 1 && $ARGV[0] =~ m/^-[io]/) {
-    my $enc = $ARGV[1];
-    if ($enc =~ m/:?utf-?8/i) {
-        $enc = 'utf8';
-    } elsif ($enc =~ m/:?utf-?16/i) {
-        $enc = 'UTF-16';
-    }
-    if ($enc ne 'utf8') {
-        if ($ARGV[0] =~ m/^-i/) {
-            $inmode = $enc;
-        } else {
-            $outmode = $enc;
-        }
-    }
-    shift(@ARGV);
-    shift(@ARGV);
+if ($0 =~ m/html2utf16$/) {
+    $outmode = 'UTF-16';
+    $doutmode = 'UTF-16';
 }
 
-if ($inmode ne 'utf8' && $#ARGV >= 1) {
-    usage("other inputmodes than utf8 not supported for multiple files: inmode=$inmode outmode=$outmode");
-}
-
-print STDERR "inmode=$inmode outmode=$outmode\n";
+print STDERR "Input Encoding: $dinmode; Output Encoding: $doutmode\n";
 # use open IN => $inmode;
 # use encoding $inmode, STDOUT => $outmode;
 
